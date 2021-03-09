@@ -14,5 +14,5 @@ Install the development version from GitHub via the package "devtools":
     # development version from GitHub:
     #install.packages("devtools") 
 
-    # install "roller" (without vignettes)
+    # install "graphdata" (without vignettes)
     devtools::install_github("matthiasronnau/graphdata")
