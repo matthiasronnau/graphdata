@@ -12,7 +12,7 @@ graph_data <- function(data = df, id = "user_id", product_id = "product_id") {
   #product_id <- data[, product_id]
   data_no_missing <- na.omit(data)
 
-  grouped <- dply::group_by(data_no_missing, across(id))
+  grouped <- dplyr::group_by(data_no_missing, across(id))
   #head(grouped)
   #length(unique(grouped$id))
   user_df <- summarize(grouped, across(product_id, list))
