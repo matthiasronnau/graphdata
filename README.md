@@ -16,3 +16,6 @@ Install the development version from GitHub via the package "devtools":
 
     # install "graphdata" (without vignettes)
     devtools::install_github("matthiasronnau/graphdata")
+    
+    # install "graphdata" (with vignettes)
+    devtools::install_github("matthiasronnau/graphdata", build_vignettes = TRUE)
