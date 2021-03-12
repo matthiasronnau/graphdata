@@ -1,11 +1,9 @@
 #' @title Graph Data
-#' @description Creates an object of class \code{"iGraph"}
+#' @description Creates an object of class \code{"iGraph"} by transforming line order data into network data.
 #' @param data dataframe of purchase history
 #' @param id column name identifying the user id
 #' @param product_id column name identifying the id of the objects purchased
 #' @return an object of class \code{"iGraph"}
-#' @import dplyr
-#' @import igraph
 #' @export
 
 graph_data <- function(data = df, id = "user_id", product_id = "product_id") {
@@ -14,11 +12,11 @@ graph_data <- function(data = df, id = "user_id", product_id = "product_id") {
   #product_id <- data[, product_id]
   data_no_missing <- na.omit(data)
 
-  grouped <- group_by(data_no_missing, across(id))
+  grouped <- dplyr::group_by(data_no_missing, across(id))
   #head(grouped)
   #length(unique(grouped$id))
-  user_df <- summarize(grouped, across(product_id, list))
-  user_df <- rename(user_df, nodes = product_id)
+  user_df <- dplyr::summarize(grouped, across(product_id, list))
+  user_df <- dplyr::rename(user_df, nodes = product_id)
   #colnames(user_df)[]
   #user_df
 
@@ -53,7 +51,7 @@ graph_data <- function(data = df, id = "user_id", product_id = "product_id") {
   #rm(i, j, len, node, nodes, num_nodes)
 
   verts <- as.character(verts)
-  g = make_graph(verts)
+  g = igraph::make_graph(verts)
   g
 }
 
