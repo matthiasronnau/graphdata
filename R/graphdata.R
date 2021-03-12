@@ -4,8 +4,6 @@
 #' @param id column name identifying the user id
 #' @param product_id column name identifying the id of the objects purchased
 #' @return an object of class \code{"iGraph"}
-#' @import dplyr
-#' @import igraph
 #' @export
 
 graph_data <- function(data = df, id = "user_id", product_id = "product_id") {
