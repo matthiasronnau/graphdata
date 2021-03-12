@@ -4,32 +4,21 @@
 #' @param id column name identifying the user id
 #' @param product_id column name identifying the id of the objects purchased
 #' @return an object of class \code{"iGraph"}
-#' @import dplyr
-#' @import igraph
+#' @importFrom dplyr across group_by summarize rename
+#' @importFrom  igraph make_graph
 #' @export
 
 graph_data <- function(data = df, id = "user_id", product_id = "product_id") {
-  #attach(data)
-  #id <-  data[, id]
-  #product_id <- data[, product_id]
   data_no_missing <- na.omit(data)
 
   grouped <- dplyr::group_by(data_no_missing, dplyr::across(id))
-  #head(grouped)
-  #length(unique(grouped$id))
   user_df <- dplyr::summarize(grouped, dplyr::across(product_id, list))
   user_df <- dplyr::rename(user_df, nodes = product_id)
-  #colnames(user_df)[]
-  #user_df
 
   user_df$num_nodes <- sapply(user_df$nodes, length)
   user_df$unique <- sapply(lapply(user_df$nodes, unique), length)
-  #sapply(sapply(user_df$nodes, unique), length)
-  #user_df
 
   non_repeated <- subset(user_df, user_df$num_nodes > 1 & user_df$unique > 1)
-  rm(user_df)
-  non_repeated
 
   verts <- c()
   for(i in 1:nrow(non_repeated)){
@@ -42,7 +31,7 @@ graph_data <- function(data = df, id = "user_id", product_id = "product_id") {
       prior <- node_list[j - 1]
       if(node == prior){
         next
-      } else if(j == len | (length(unique(node_list[j:len]))) == 1){
+      } else if(length(unique(node_list[j:len])) == 1){
         nodes <- c(nodes, node)
       } else{
         nodes <- c(nodes, node, node)
@@ -50,8 +39,6 @@ graph_data <- function(data = df, id = "user_id", product_id = "product_id") {
     }
     verts <- c(verts, nodes)
   }
-  #rm(i, j, len, node, nodes, num_nodes)
-
   verts <- as.character(verts)
   g = igraph::make_graph(verts)
   g
