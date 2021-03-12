@@ -14,10 +14,10 @@ graph_data <- function(data = df, id = "user_id", product_id = "product_id") {
   #product_id <- data[, product_id]
   data_no_missing <- na.omit(data)
 
-  grouped <- dplyr::group_by(data_no_missing, across(id))
+  grouped <- dplyr::group_by(data_no_missing, dplyr::across(id))
   #head(grouped)
   #length(unique(grouped$id))
-  user_df <- dplyr::summarize(grouped, across(product_id, list))
+  user_df <- dplyr::summarize(grouped, dplyr::across(product_id, list))
   user_df <- dplyr::rename(user_df, nodes = product_id)
   #colnames(user_df)[]
   #user_df
