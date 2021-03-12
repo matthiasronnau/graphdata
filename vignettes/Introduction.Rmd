@@ -1,0 +1,62 @@
+---
+title: "Introduction to graphdata"
+author: "Matthias Ronnau"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to graphdata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(graphdata)
+```
+
+### Generating graph data
+
+The package "`graphdata`" is a simple package that transforms purchase data
+into an iGraph object. The iGraph package is useful for visualizing and
+computing various statistics about a social network, but sometime data must
+be transformed in order to work properly. This package takes event level
+data and transforms it into a network that is workable with iGraph.
+
+
+### Generating the `iGraph` object
+
+The dataframe must have a unique identifier to group by, such as a user id. 
+It must also have a unique identifier for every product in the network, 
+such as a product id.
+
+```{r}
+set.seed(277)
+df <- data.frame("user_identifier" = rep(1:3, 3), 
+                 "product" = 277:285, 
+                 "price" = c(sample(1:500, 4, replace = TRUE), NA, 
+                             sample(1:500, 4, replace = TRUE)))
+```
+
+The data to be used must be cleansed of all missing values.
+
+```{r}
+cleaned_df <- na.omit(df)
+```
+
+The cleaned data can now be transformed into an iGraph object with `graph_data()`.
+
+```{r}
+g <- graph_data(data = cleaned_df, id = "user_identifier", 
+                product_id = "product")
+g
+```
+
+The resulting object can now be visualized as a network or transformed into a 
+dataframe using built in iGraph functions in order to compute various 
+statistics about the network.
