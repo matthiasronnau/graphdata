@@ -17,5 +17,5 @@ graph_data(data = df, id = "user_id", product_id = "product_id")
 an object of class \code{"iGraph"}
 }
 \description{
-Creates an object of class \code{"iGraph"} by transforming line order data into network data.
+Creates an object of class \code{"iGraph"} by transforming event level data into network data.
 }
