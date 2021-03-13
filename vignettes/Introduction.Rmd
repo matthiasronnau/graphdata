@@ -52,11 +52,22 @@ cleaned_df <- na.omit(df)
 The cleaned data can now be transformed into an iGraph object with `graph_data()`.
 
 ```{r}
-g <- graph_data(data = cleaned_df, id = "user_identifier", 
-                product_id = "product")
+g <- graph_data(data = cleaned_df, id = "user_identifier", product_id = "product")
 g
 ```
 
 The resulting object can now be visualized as a network or transformed into a 
 dataframe using built in iGraph functions in order to compute various 
 statistics about the network.
+
+### Using graph_data in conjucntion with igraph
+
+Once the graph object has been generated with the `graph_data()`, it is 
+possible to use it in conjunction with the various functions available in 
+igraph, such as visualizing the network.
+
+```{r}
+plot(g)
+```
+
+
