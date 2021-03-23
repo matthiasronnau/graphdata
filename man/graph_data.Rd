@@ -4,7 +4,7 @@
 \alias{graph_data}
 \title{Graph Data}
 \usage{
-graph_data(data = df, id = "user_id", product_id = "product_id")
+graph_data(data, id, product_id)
 }
 \arguments{
 \item{data}{dataframe of purchase history}
