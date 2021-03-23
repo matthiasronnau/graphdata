@@ -1,5 +1,5 @@
 ### Overview
-"graphdata" is a small R package that is used to transform line item purchase data into an iGraph object for network analysis.
+"graphdata" is a small R package that is used to transform event level customer data into an iGraph object for network analysis.
 -graph_data() creates an iGraph object.
 ___
 ### Motivation
