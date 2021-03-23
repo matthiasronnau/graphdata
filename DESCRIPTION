@@ -10,6 +10,7 @@ Authors@R:
 Description: In order to use packages to visualize networks, such as iGraph, the data must be in the form of two columns, a "Source" and a "Target". 
   This package takes in purchase data and transforms it to be used with iGraph.
 Depends:
+    R (>= 3.30),
     dplyr,
     igraph
 License: MIT + file LICENSE
